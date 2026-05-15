@@ -10,6 +10,7 @@ using MM.Application.Shared.Interfaces;
 using MM.Application.Shared.Mediator;
 using MM.Infrastructure.Persistence.Context;
 using MM.Infrastructure.Persistence.Daos;
+using MM.Infrastructure.Persistence.Repositories;
 using MM.Infrastructure.Persistence.UnityOfWork;
 
 namespace MM.CrossCutting.Dependencies;
@@ -24,6 +25,8 @@ public static class DependencyInjection
 
         services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<ICustomersDao, CustomersDao>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+
         services.AddAppMediator();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TranslacionalBehaviour<,>));

@@ -9,7 +9,7 @@ using MM.Infrastructure.Persistence.Context;
 
 namespace MM.Infrastructure.Persistence.Daos;
 
-public class CustomersDao (AppDbContext context) : ICustomerDao
+public class CustomersDao (AppDbContext context) : ICustomersDao
 {
     private readonly AppDbContext _context = context;
 

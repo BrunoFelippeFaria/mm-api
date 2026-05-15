@@ -18,7 +18,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
 
-        services.AddScoped<ICustomerDao, CustomersDao>();
+        services.AddScoped<ICustomersDao, CustomersDao>();
         services.AddAppMediator();
         return services;
     }

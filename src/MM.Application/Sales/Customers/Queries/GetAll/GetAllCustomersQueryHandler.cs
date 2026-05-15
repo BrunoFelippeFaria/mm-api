@@ -6,10 +6,10 @@ using MM.Application.Sales.Customers.Interfaces;
 
 namespace MM.Application.Sales.Customers.Queries.GetAll;
 
-public class GetAllCustomersQueryHandler (ICustomerDao customerDao)
+public class GetAllCustomersQueryHandler (ICustomersDao customerDao)
     : IRequestHandler<GetAllCustomersQuery, IEnumerable<CustomerDto>>
 {
-    private readonly ICustomerDao _customerDao = customerDao;
+    private readonly ICustomersDao _customerDao = customerDao;
 
     public async ValueTask<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
     {

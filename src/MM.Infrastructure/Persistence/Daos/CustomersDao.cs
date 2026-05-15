@@ -24,7 +24,7 @@ public class CustomersDao (AppDbContext context) : ICustomersDao
             .ToListAsync();
     }
 
-    public async Task<CustomerDto> GetById(int id)
+    public async Task<CustomerDto?> GetById(int id)
     {
         return await _context.Customers
             .Select(c => new CustomerDto
@@ -32,7 +32,6 @@ public class CustomersDao (AppDbContext context) : ICustomersDao
                 Id = c.Id,
                 Name = c.Name
             })
-            .FirstOrDefaultAsync(c => c.Id == id)
-            ?? throw new NotFoundException($"Customer {id} does not exist");
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

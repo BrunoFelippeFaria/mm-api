@@ -2,6 +2,7 @@ using Mediator;
 
 using MM.Application.Sales.Customers.Dtos;
 using MM.Application.Sales.Customers.Interfaces;
+using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Sales.Customers.Queries.GetById;
 
@@ -12,7 +13,9 @@ public class GetCustomerByIdQueryHandler(ICustomersDao customerDao)
 
     public async ValueTask<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {
-        var customer = await _customerDao.GetById(request.Id);
+        var customer = await _customerDao.GetById(request.Id)
+            ?? throw new NotFoundException($"customer {request.Id} does not exists");
+
         return customer; 
     }
 }

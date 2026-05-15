@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\MM.CrossCutting\MM.CrossCutting.csproj" />
@@ -8,6 +8,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5e495441-6914-4dc0-805b-c46165747857</UserSecretsId>
   </PropertyGroup>
 
 </Project>

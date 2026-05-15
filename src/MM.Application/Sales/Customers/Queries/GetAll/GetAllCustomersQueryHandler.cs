@@ -2,14 +2,18 @@
 using Mediator;
 
 using MM.Application.Sales.Customers.Dtos;
+using MM.Application.Sales.Customers.Interfaces;
 
 namespace MM.Application.Sales.Customers.Queries.GetAll;
 
-public sealed record GetAllCustomersQueryHandler
+public class GetAllCustomersQueryHandler (ICustomerDao customerDao)
     : IRequestHandler<GetAllCustomersQuery, IEnumerable<CustomerDto>>
 {
-    public ValueTask<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+    private readonly ICustomerDao _customerDao = customerDao;
+
+    public async ValueTask<IEnumerable<CustomerDto>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(Enumerable.Empty<CustomerDto>());
+        var customers = await _customerDao.GetAll();
+        return customers;
     }
 }

@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MM.Application.Sales.Customers.Interfaces;
 using MM.Application.Shared.Mediator;
 using MM.Infrastructure.Persistence.Context;
+using MM.Infrastructure.Persistence.Daos;
 
 namespace MM.CrossCutting.Dependencies;
 
@@ -16,6 +18,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
 
+        services.AddScoped<ICustomerDao, CustomersDao>();
         services.AddAppMediator();
         return services;
     }

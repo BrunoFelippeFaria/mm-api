@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
+
 using Mediator;
 
 using Microsoft.AspNetCore.Mvc;
 
+using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Queries.GetAll;
 using MM.Application.Sales.Customers.Queries.GetById;
 
@@ -25,5 +28,12 @@ public class CustomersController (IMediator mediator) : ControllerBase
     {
         var customer = await _mediator.Send(new GetCustomerByIdQuery(id));
         return Ok(customer);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateCustomerCommand command)
+    {
+        await _mediator.Send(command);
+        return Created();
     }
 }

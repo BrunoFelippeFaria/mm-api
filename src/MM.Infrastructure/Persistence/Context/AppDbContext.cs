@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using MM.Domain.Entities;
+using MM.Domain.Sales.Customers.Entities;
 
 namespace MM.Infrastructure.Persistence.Context;
 

@@ -1,4 +1,4 @@
-namespace MM.Domain.Entities;
+namespace MM.Domain.Sales.Customers.Entities;
 
 public class Customer
 {

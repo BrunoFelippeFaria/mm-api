@@ -3,6 +3,7 @@ using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 using MM.Application.Sales.Customers.Queries.GetAll;
+using MM.Application.Sales.Customers.Queries.GetById;
 
 namespace MM.API.Controllers;
 
@@ -17,5 +18,12 @@ public class CustomersController (IMediator mediator) : ControllerBase
     {
         var customers = await _mediator.Send(new GetAllCustomersQuery());
         return Ok(customers);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var customer = await _mediator.Send(new GetCustomerByIdQuery(id));
+        return Ok(customer);
     }
 }

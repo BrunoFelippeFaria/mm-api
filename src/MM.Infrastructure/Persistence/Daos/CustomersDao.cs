@@ -22,4 +22,15 @@ public class CustomersDao (AppDbContext context) : ICustomerDao
             })
             .ToListAsync();
     }
+
+    public async Task<CustomerDto> GetById(int id)
+    {
+        return await _context.Customers
+            .Select(c => new CustomerDto
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .FirstAsync(c => c.Id == id);
+    }
 }

@@ -4,5 +4,6 @@ namespace MM.Application.Sales.Customers.Interfaces;
 
 public interface ICustomerDao
 {
-    public Task<IReadOnlyList<CustomerDto>> GetAll();
+    Task<IReadOnlyList<CustomerDto>> GetAll();
+    Task<CustomerDto> GetById(int id);
 }

@@ -23,6 +23,8 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Default"))
         );
 
+        
+
         services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<ICustomersDao, CustomersDao>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();

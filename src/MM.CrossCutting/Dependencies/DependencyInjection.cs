@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MM.Application.Shared.Mediator;
 using MM.Infrastructure.Persistence.Context;
 
 namespace MM.CrossCutting.Dependencies;
@@ -14,7 +15,8 @@ public static class DependencyInjection
         {
             options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
-        
+
+        services.AddAppMediator();
         return services;
     }
 }

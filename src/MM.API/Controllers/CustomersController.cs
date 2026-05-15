@@ -1,9 +1,12 @@
+using System.Threading.Tasks;
+
 using Mediator;
 
 using Microsoft.AspNetCore.Mvc;
 
 using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Commands.Delete;
+using MM.Application.Sales.Customers.Commands.Update;
 using MM.Application.Sales.Customers.Queries.GetAll;
 using MM.Application.Sales.Customers.Queries.GetById;
 
@@ -40,6 +43,13 @@ public class CustomersController (IMediator mediator) : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         await _mediator.Send(new DeleteCustomerCommand(id));
+        return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCustomerCommand command)
+    {
+        await _mediator.Send(command with { Id = id });
         return NoContent();
     }
 }

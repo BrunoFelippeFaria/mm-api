@@ -1,12 +1,36 @@
-using MM.Application.Auth.Commands.Login;
-using MM.Domain.Management.Users.Entities;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using MM.Domain.Management.Users.Entities;
 namespace MM.Application.Auth.Services;
 
-public class TokenGenerator
+public class TokenGenerator (IConfiguration configuration)
 {
-    public string Generate(User user)
+    private readonly IConfiguration _configuration = configuration;
+
+    public string GenerateJwtToken(User user)
     {
-        
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new(ClaimTypes.Name, user.Name),
+            new(ClaimTypes.Email, user.Email)
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:audience"],
+            claims: claims,
+            expires: DateTime.Now.AddDays(7),
+            signingCredentials: creds
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

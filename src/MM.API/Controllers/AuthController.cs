@@ -1,6 +1,7 @@
 using Mediator;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 using MM.Application.Auth.Commands.Login;
 
@@ -8,6 +9,8 @@ namespace MM.API.Controllers;
 
 [ApiController]
 [Route("api/auth")]
+[EnableRateLimiting("auth")]
+
 public class AuthController (IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;

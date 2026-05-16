@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
+using MM.Application.Auth.Interfaces;
+using MM.Application.Auth.Services;
 using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Interfaces;
 using MM.Application.Shared.Behaviours;
@@ -41,6 +43,8 @@ public static class DependencyInjection
         
         services.AddValidatorsFromAssembly(typeof(CreateCustomerCommand).Assembly);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+        services.AddScoped<ITokenGenerator, TokenGenerator>();
 
         services.AddAuthentication(options =>
         {

@@ -4,10 +4,12 @@ using System.Text;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+
+using MM.Application.Auth.Interfaces;
 using MM.Domain.Management.Users.Entities;
 namespace MM.Application.Auth.Services;
 
-public class TokenGenerator (IConfiguration configuration)
+public class TokenGenerator (IConfiguration configuration) : ITokenGenerator
 {
     private readonly IConfiguration _configuration = configuration;
 

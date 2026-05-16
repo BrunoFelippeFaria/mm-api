@@ -1,3 +1,4 @@
+using FluentValidation;
 using MM.Domain.Shared.Base;
 using MM.Domain.Shared.Exceptions;
 
@@ -13,20 +14,36 @@ public class ExceptionHandler(RequestDelegate  next)
         {
             await _next(context);
         }
-        
+
         catch (DomainException ex)
         {
             context.Response.ContentType = "application/json";
 
             if (ex is NotFoundException)
             {
-                context.Response.StatusCode = 404;
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
 
             await context.Response.WriteAsJsonAsync(new
             {
                 code = ex.Code,
-                message = ex.Message 
+                message = ex.Message
+            });
+        }
+        
+        catch (ValidationException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            await context.Response.WriteAsJsonAsync(new
+            {
+                code = "validation_error",
+                message = "um ou mais erros de validação.",
+                errors = ex.Errors.Select(e => new {
+                    field = e.PropertyName,
+                    message = e.ErrorMessage
+                })
             });
         }
     }

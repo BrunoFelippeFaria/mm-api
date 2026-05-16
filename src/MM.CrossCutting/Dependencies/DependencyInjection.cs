@@ -1,9 +1,14 @@
+using System.Reflection;
+
+using FluentValidation;
+
 using Mediator;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Interfaces;
 using MM.Application.Shared.Behaviours;
 using MM.Application.Shared.Interfaces;
@@ -23,8 +28,6 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Default"))
         );
 
-        
-
         services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<ICustomersDao, CustomersDao>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -32,6 +35,10 @@ public static class DependencyInjection
         services.AddAppMediator();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TranslacionalBehaviour<,>));
+        
+        services.AddValidatorsFromAssembly(typeof(CreateCustomerCommand).Assembly);
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
         return services;
     }
 }

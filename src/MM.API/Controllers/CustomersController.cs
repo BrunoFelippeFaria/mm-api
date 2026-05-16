@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 
 using Mediator;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using MM.Application.Sales.Customers.Commands.Create;
@@ -14,7 +15,8 @@ namespace MM.API.Controllers;
 
 [ApiController]
 [Route("api/v1/sales/customers")]
-public class CustomersController (IMediator mediator) : ControllerBase
+[Authorize]
+public class CustomersController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 

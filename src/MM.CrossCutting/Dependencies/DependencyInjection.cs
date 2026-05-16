@@ -6,6 +6,7 @@ using FluentValidation;
 using Mediator;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,10 +19,12 @@ using MM.Application.Sales.Customers.Interfaces;
 using MM.Application.Shared.Behaviours;
 using MM.Application.Shared.Interfaces;
 using MM.Application.Shared.Mediator;
+using MM.Domain.Shared.Interfaces;
 using MM.Infrastructure.Persistence.Context;
 using MM.Infrastructure.Persistence.Daos;
 using MM.Infrastructure.Persistence.Repositories;
 using MM.Infrastructure.Persistence.UnityOfWork;
+using MM.Infrastructure.Security;
 
 namespace MM.CrossCutting.Dependencies;
 
@@ -33,8 +36,12 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("Default"))
         );
 
+        services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
+
         services.AddScoped<IUnityOfWork, UnityOfWork>();
         services.AddScoped<ICustomersDao, CustomersDao>();
+        services.AddScoped<IUsersDao, UsersDao>();
+
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         services.AddAppMediator();
@@ -51,16 +58,30 @@ public static class DependencyInjection
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(
-            options => options.TokenValidationParameters = new()
+        options =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = configuration["Jwt:Issuer"],
-            ValidAudience = configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
+            options.TokenValidationParameters = new()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
+            };
+
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    context.Token = context.Request.Cookies["access_token"];
+                    return Task.CompletedTask;
+                }
+            };
         });
+
+        services.AddAuthorization();
 
         return services;
     }

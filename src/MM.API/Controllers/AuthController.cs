@@ -15,7 +15,16 @@ public class AuthController (IMediator mediator) : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
     {
-        await _mediator.Send(command);
+        string token = await _mediator.Send(command);
+
+        Response.Cookies.Append("access_token", token, new CookieOptions
+        {
+            HttpOnly = true,
+            SameSite = SameSiteMode.Lax,
+            Expires = DateTimeOffset.UtcNow.AddDays(7),
+            Path = "/",
+        });
+
         return NoContent();
     }
 }

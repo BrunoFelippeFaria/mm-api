@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+using MM.Domain.Management.Users.Entities;
 using MM.Domain.Sales.Customers.Entities;
 
 namespace MM.Infrastructure.Persistence.Context;
@@ -14,4 +15,5 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     }
 
     public DbSet<Customer> Customers { get; set; } 
+    public DbSet<User> Users { get; set; } 
 }

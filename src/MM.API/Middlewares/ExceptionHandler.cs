@@ -20,9 +20,10 @@ public class ExceptionHandler(RequestDelegate  next)
             context.Response.ContentType = "application/json";
 
             if (ex is NotFoundException)
-            {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
-            }
+
+            if (ex is UnauthorizedException)
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
 
             await context.Response.WriteAsJsonAsync(new
             {

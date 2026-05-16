@@ -5,15 +5,15 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
+using MM.Application.Auth.Dtos;
 using MM.Application.Auth.Interfaces;
-using MM.Domain.Management.Users.Entities;
 namespace MM.Application.Auth.Services;
 
 public class TokenGenerator (IConfiguration configuration) : ITokenGenerator
 {
     private readonly IConfiguration _configuration = configuration;
 
-    public string GenerateJwtToken(User user)
+    public string GenerateJwtToken(UserAuthDto user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -29,7 +29,7 @@ public class TokenGenerator (IConfiguration configuration) : ITokenGenerator
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:audience"],
             claims: claims,
-            expires: DateTime.Now.AddDays(7),
+            expires: DateTime.UtcNow.AddDays(7),
             signingCredentials: creds
         );
 

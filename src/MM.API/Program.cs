@@ -11,6 +11,9 @@ var app = builder.Build();
 app.UseRouting();
 app.MapControllers();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseMiddleware<ExceptionHandler>();
 
 app.Run();

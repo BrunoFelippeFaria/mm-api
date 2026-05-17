@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using FluentValidation;
 
 namespace MM.Application.Auth.Commands.Login;
@@ -8,7 +10,7 @@ public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {
         RuleFor(x => x.Email)
             .NotEmpty()
-            .EmailAddress();
+            .Must(value => value == "admin" || new EmailAddressAttribute().IsValid(value));
 
         RuleFor(x => x.Password)
             .NotEmpty()

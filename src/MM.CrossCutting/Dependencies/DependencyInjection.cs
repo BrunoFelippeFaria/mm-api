@@ -23,6 +23,7 @@ using MM.Domain.Shared.Interfaces;
 using MM.Infrastructure.Persistence.Context;
 using MM.Infrastructure.Persistence.Daos;
 using MM.Infrastructure.Persistence.Repositories;
+using MM.Infrastructure.Persistence.Seeds;
 using MM.Infrastructure.Persistence.UnityOfWork;
 using MM.Infrastructure.Security;
 
@@ -35,6 +36,8 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("Default"))
         );
+
+        services.AddScoped<ISeed, AdminSeed>();
 
         services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
 

@@ -18,6 +18,7 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
         return await _context.Materials
             .Select(m => new MaterialListDto
             {
+                Id = m.Id,
                 Description = m.Description,
             })
             .AsNoTracking()
@@ -30,10 +31,19 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
             .Where(m => m.Id == id)
             .Select(m => new MaterialDto
             {
+                Id = m.Id,
                 Description = m.Description,
+                Unit = m.Unit,
                 LastBuyPrice = m.LastBuyPrice,
                 SafetyStock = m.SafetyStock,
-                Notes = m.Notes
+                Notes = m.Notes,
+
+
+                Category = new MaterialCategoryDto
+                {
+                    Id = m.Category.Id,
+                    Description = m.Category.Description
+                },
             })
             .AsNoTracking()
             .FirstOrDefaultAsync();

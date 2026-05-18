@@ -25,6 +25,7 @@ using MM.Infrastructure.Persistence.Context;
 using MM.Infrastructure.Persistence.Daos.Catalog;
 using MM.Infrastructure.Persistence.Daos.Managment;
 using MM.Infrastructure.Persistence.Daos.Sales;
+using MM.Infrastructure.Persistence.Repositories.Catalog;
 using MM.Infrastructure.Persistence.Repositories.Sales;
 using MM.Infrastructure.Persistence.Seeds;
 using MM.Infrastructure.Persistence.UnityOfWork;
@@ -51,6 +52,7 @@ public static class DependencyInjection
         services.AddScoped<IMaterialsDao, MaterialsDao>();
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IMaterialRepository, MaterialRepository>();
 
         services.AddAppMediator();
 

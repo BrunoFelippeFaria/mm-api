@@ -5,6 +5,7 @@ using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using MM.Application.Catalog.Materials.Commands.Create;
 using MM.Application.Catalog.Materials.Queries.GetAll;
 using MM.Application.Catalog.Materials.Queries.GetById;
 
@@ -32,9 +33,10 @@ public class MaterialsController (IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create()
+    public async Task<IActionResult> Create([FromBody] CreateMaterialCommand command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(command);
+        return Created();
     }
 
     [HttpPut("{id}")]

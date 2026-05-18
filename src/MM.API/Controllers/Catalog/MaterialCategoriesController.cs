@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using MM.Application.Catalog.MaterialCategories.Commands.Create;
+using MM.Application.Catalog.MaterialCategories.Commands.Update;
 using MM.Application.Catalog.MaterialCategories.Queries.GetAll;
 using MM.Application.Catalog.MaterialCategories.Queries.GetById;
 
@@ -40,9 +41,10 @@ public class MaterialsCategoryController (IMediator mediator) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id)
+    public async Task<IActionResult> Update(int id, UpdateMaterialCategoryCommand command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(command with { Id = id });
+        return NoContent();
     }
 
     [HttpPatch("{id}/delete")]

@@ -17,5 +17,5 @@ public class Product : Entity
 
     public ProductCategory Category { get; set; } = null!;
     public ICollection<ProductRecipe> Recipe { get; set; } = [];
-    public ICollection<KitItem> KitItens { get; set; } = [];
+    public ICollection<KitItem> KitItems { get; set; } = [];
 }

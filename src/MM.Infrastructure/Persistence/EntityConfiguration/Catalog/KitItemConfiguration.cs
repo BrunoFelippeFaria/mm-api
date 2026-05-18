@@ -11,6 +11,16 @@ public class KitItemConfiguration : IEntityTypeConfiguration<KitItem>
     {
         builder.HasKey(x => x.Id);
 
+        builder.HasOne(x => x.Kit)
+               .WithMany(x => x.KitItems)
+               .HasForeignKey(x => x.KitId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(x => x.Product)
+               .WithMany()
+               .HasForeignKey(x => x.ProductId)
+               .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasQueryFilter(x => x.IsDeleted == false);
     }
 }

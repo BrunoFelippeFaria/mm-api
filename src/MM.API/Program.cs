@@ -11,9 +11,9 @@ builder.Services.AddControllers()
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
 );
 
-
 builder.Services.AddDependencies(builder.Configuration);
 builder.Services.AddAppRateLimiter();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 
@@ -21,10 +21,14 @@ await app.ApplySeeds();
 
 app.UseRouting();
 app.MapControllers();
-
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionHandler>();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+}
 
 app.Run();

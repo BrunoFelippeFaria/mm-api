@@ -11,7 +11,7 @@ using MM.Application.Sales.Customers.Commands.Update;
 using MM.Application.Sales.Customers.Queries.GetAll;
 using MM.Application.Sales.Customers.Queries.GetById;
 
-namespace MM.API.Controllers;
+namespace MM.API.Controllers.Sales;
 
 [ApiController]
 [Route("api/v1/sales/customers")]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.RateLimiting;
 
 using MM.Application.Auth.Commands.Login;
 
-namespace MM.API.Controllers;
+namespace MM.API.Controllers.Managment;
 
 [ApiController]
 [Route("api/auth")]

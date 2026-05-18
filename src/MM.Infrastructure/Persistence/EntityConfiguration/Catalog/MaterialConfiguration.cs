@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using MM.Domain.Catalog.Materials.Entities;
 
-namespace MM.Infrastructure.Persistence.EntityConfiguration;
+namespace MM.Infrastructure.Persistence.EntityConfiguration.Catalog;
 
-public class MaterialCategoryConfiguration : IEntityTypeConfiguration<MaterialCategory>
+public class MaterialConfiguration : IEntityTypeConfiguration<Material>
 {
-    public void Configure(EntityTypeBuilder<MaterialCategory> builder)
+    public void Configure(EntityTypeBuilder<Material> builder)
     {
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Description)
-            .HasMaxLength(30);
+            .HasMaxLength(60);
 
         builder.HasQueryFilter(x => x.IsDeleted == false);
     }

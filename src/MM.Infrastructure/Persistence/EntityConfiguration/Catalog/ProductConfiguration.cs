@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using MM.Domain.Catalog.Materials.Entities;
+using MM.Domain.Catalog.Products.Entities;
 
-namespace MM.Infrastructure.Persistence.EntityConfiguration;
+namespace MM.Infrastructure.Persistence.EntityConfiguration.Catalog;
 
-public class MaterialConfiguration : IEntityTypeConfiguration<Material>
+public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Material> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(x => x.Id);
 

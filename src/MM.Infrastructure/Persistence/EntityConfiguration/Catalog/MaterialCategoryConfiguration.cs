@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using MM.Domain.Sales.Customers.Entities;
+using MM.Domain.Catalog.Materials.Entities;
 
-namespace MM.Infrastructure.Persistence.EntityConfiguration;
+namespace MM.Infrastructure.Persistence.EntityConfiguration.Catalog;
 
-public class CustomerGroupConfiguration : IEntityTypeConfiguration<CustomerGroup>
+public class MaterialCategoryConfiguration : IEntityTypeConfiguration<MaterialCategory>
 {
-    public void Configure(EntityTypeBuilder<CustomerGroup> builder)
+    public void Configure(EntityTypeBuilder<MaterialCategory> builder)
     {
         builder.HasKey(x => x.Id);
 

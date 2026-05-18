@@ -2,7 +2,7 @@ using MM.Application.Sales.Customers.Interfaces;
 using MM.Domain.Sales.Customers.Entities;
 using MM.Infrastructure.Persistence.Context;
 
-namespace MM.Infrastructure.Persistence.Repositories;
+namespace MM.Infrastructure.Persistence.Repositories.Sales;
 
 public class CustomerRepository (AppDbContext context) : ICustomerRepository
 {

@@ -4,10 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 using MM.Application.Sales.Customers.Dtos;
 using MM.Application.Sales.Customers.Interfaces;
-using MM.Domain.Shared.Exceptions;
 using MM.Infrastructure.Persistence.Context;
 
-namespace MM.Infrastructure.Persistence.Daos;
+namespace MM.Infrastructure.Persistence.Daos.Sales;
 
 public class CustomersDao (AppDbContext context) : ICustomersDao
 {

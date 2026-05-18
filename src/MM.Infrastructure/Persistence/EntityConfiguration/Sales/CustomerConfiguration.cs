@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using MM.Domain.Sales.Customers.Entities;
 
-namespace MM.Infrastructure.Persistence.EntityConfiguration;
+namespace MM.Infrastructure.Persistence.EntityConfiguration.Sales;
 
 public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {

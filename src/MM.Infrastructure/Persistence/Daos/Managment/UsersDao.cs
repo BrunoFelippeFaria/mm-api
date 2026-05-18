@@ -4,7 +4,7 @@ using MM.Application.Auth.Dtos;
 using MM.Application.Shared.Interfaces;
 using MM.Infrastructure.Persistence.Context;
 
-namespace MM.Infrastructure.Persistence.Daos;
+namespace MM.Infrastructure.Persistence.Daos.Managment;
 
 public class UsersDao(AppDbContext context) : IUsersDao
 {

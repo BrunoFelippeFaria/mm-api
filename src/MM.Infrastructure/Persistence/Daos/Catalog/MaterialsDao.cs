@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
+using MM.Application.Catalog.MaterialCategories.Dtos;
 using MM.Application.Catalog.Materials.Dtos;
 using MM.Application.Catalog.Materials.Interfaces;
 using MM.Infrastructure.Persistence.Context;

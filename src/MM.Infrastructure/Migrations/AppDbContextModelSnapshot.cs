@@ -60,7 +60,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Materials.Entities.MaterialCategory", b =>
@@ -84,7 +84,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MaterialCategories");
+                    b.ToTable("MaterialCategories", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Products.Entities.KitItem", b =>
@@ -116,7 +116,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("KitItem");
+                    b.ToTable("KitItem", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Products.Entities.Product", b =>
@@ -163,7 +163,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Products.Entities.ProductCategory", b =>
@@ -187,7 +187,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Products.Entities.ProductRecipe", b =>
@@ -219,7 +219,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductRecipe");
+                    b.ToTable("ProductRecipe", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Management.Users.Entities.User", b =>
@@ -254,7 +254,7 @@ namespace MM.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Sales.Customers.Entities.Customer", b =>
@@ -292,7 +292,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Sales.Customers.Entities.CustomerGroup", b =>
@@ -316,7 +316,7 @@ namespace MM.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerGroup");
+                    b.ToTable("CustomerGroup", (string)null);
                 });
 
             modelBuilder.Entity("MM.Domain.Catalog.Materials.Entities.Material", b =>

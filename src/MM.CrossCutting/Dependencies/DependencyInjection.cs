@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using MM.Application.Auth.Interfaces;
 using MM.Application.Auth.Services;
+using MM.Application.Catalog.MaterialCategories.Interfaces;
 using MM.Application.Catalog.Materials.Interfaces;
 using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Interfaces;
@@ -50,6 +51,7 @@ public static class DependencyInjection
         services.AddScoped<ICustomersDao, CustomersDao>();
         services.AddScoped<IUsersDao, UsersDao>();
         services.AddScoped<IMaterialsDao, MaterialsDao>();
+        services.AddScoped<IMaterialCategoryDao, MaterialCategoryDao>();
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IMaterialRepository, MaterialRepository>();

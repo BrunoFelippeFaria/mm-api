@@ -1,3 +1,4 @@
+using MM.Application.Catalog.MaterialCategories.Dtos;
 using MM.Domain.Catalog.Shared.Enums;
 
 namespace MM.Application.Catalog.Materials.Dtos;

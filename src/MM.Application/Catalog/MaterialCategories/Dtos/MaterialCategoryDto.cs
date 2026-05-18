@@ -1,4 +1,4 @@
-namespace MM.Application.Catalog.Materials.Dtos;
+namespace MM.Application.Catalog.MaterialCategories.Dtos;
 
 public record MaterialCategoryDto
 {

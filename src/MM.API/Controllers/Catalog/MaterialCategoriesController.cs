@@ -1,23 +1,32 @@
+using Mediator;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using MM.Application.Catalog.MaterialCategories.Queries.GetAll;
+using MM.Application.Catalog.MaterialCategories.Queries.GetById;
 
 namespace MM.API.Controllers.Catalog;
 
 [ApiController]
 [Route("api/v1/catalog/materials/categories")]
 [Authorize]
-public class MaterialsCategoryController : ControllerBase
+public class MaterialsCategoryController (IMediator mediator) : ControllerBase
 {
+    private readonly IMediator _mediator = mediator;
+
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        throw new NotImplementedException();
+        var categories = await _mediator.Send(new GetAllMaterialCategoriesQuery());
+        return Ok(categories);
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        throw new NotImplementedException();
+        var category = await _mediator.Send(new GetMaterialCategoryByIdQuery(id));
+        return Ok(category);
     }
 
     [HttpPost]

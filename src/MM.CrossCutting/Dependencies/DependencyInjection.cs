@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using MM.Application.Auth.Interfaces;
 using MM.Application.Auth.Services;
+using MM.Application.Catalog.Materials.Interfaces;
 using MM.Application.Sales.Customers.Commands.Create;
 using MM.Application.Sales.Customers.Interfaces;
 using MM.Application.Shared.Behaviours;
@@ -21,6 +22,7 @@ using MM.Application.Shared.Interfaces;
 using MM.Application.Shared.Mediator;
 using MM.Domain.Shared.Interfaces;
 using MM.Infrastructure.Persistence.Context;
+using MM.Infrastructure.Persistence.Daos.Catalog;
 using MM.Infrastructure.Persistence.Daos.Managment;
 using MM.Infrastructure.Persistence.Daos.Sales;
 using MM.Infrastructure.Persistence.Repositories.Sales;
@@ -43,8 +45,10 @@ public static class DependencyInjection
         services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
 
         services.AddScoped<IUnityOfWork, UnityOfWork>();
+
         services.AddScoped<ICustomersDao, CustomersDao>();
         services.AddScoped<IUsersDao, UsersDao>();
+        services.AddScoped<IMaterialsDao, MaterialsDao>();
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
 

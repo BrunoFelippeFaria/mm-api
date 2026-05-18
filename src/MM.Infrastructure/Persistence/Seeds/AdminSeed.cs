@@ -14,7 +14,7 @@ public class AdminSeed(AppDbContext context, IPasswordHasher passwordHasher) : I
 
     public async Task Seed()
     {
-        if (await _context.Users.AnyAsync())
+        if (await _context.Users.IgnoreQueryFilters().AnyAsync())
             return;
 
         _context.Users.Add(new User

@@ -20,6 +20,7 @@ public class CustomersDao (AppDbContext context) : ICustomersDao
                 Id = c.Id,
                 Name = c.Name
             })
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -31,6 +32,7 @@ public class CustomersDao (AppDbContext context) : ICustomersDao
                 Id = c.Id,
                 Name = c.Name
             })
+            .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

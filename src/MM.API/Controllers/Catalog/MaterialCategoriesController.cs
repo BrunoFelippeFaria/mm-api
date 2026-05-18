@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
+
 using Mediator;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using MM.Application.Catalog.MaterialCategories.Commands.Create;
 using MM.Application.Catalog.MaterialCategories.Queries.GetAll;
 using MM.Application.Catalog.MaterialCategories.Queries.GetById;
 
@@ -30,9 +33,10 @@ public class MaterialsCategoryController (IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create()
+    public async Task<IActionResult> Create([FromBody] CreateMaterialCategoryCommand command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(command);
+        return Created();
     }
 
     [HttpPut("{id}")]

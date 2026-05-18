@@ -55,6 +55,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IMaterialRepository, MaterialRepository>();
+        services.AddScoped<IMaterialCategoryRepository, MaterialCategoryRepository>();
 
         services.AddAppMediator();
 

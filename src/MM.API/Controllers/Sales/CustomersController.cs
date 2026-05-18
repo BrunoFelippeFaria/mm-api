@@ -41,7 +41,7 @@ public class CustomersController(IMediator mediator) : ControllerBase
         return Created();
     }
 
-    [HttpPatch("delete/{id}")]
+    [HttpPatch("{id}/delete")]
     public async Task<IActionResult> Delete(int id)
     {
         await _mediator.Send(new DeleteCustomerCommand(id));

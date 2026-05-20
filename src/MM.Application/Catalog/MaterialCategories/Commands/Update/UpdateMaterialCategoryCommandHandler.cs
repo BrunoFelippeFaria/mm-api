@@ -2,6 +2,7 @@ using Mediator;
 
 using MM.Application.Catalog.MaterialCategories.Exceptions;
 using MM.Application.Catalog.MaterialCategories.Interfaces;
+using MM.Domain.Shared.Extensions;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Update;
 
@@ -16,13 +17,15 @@ public class UpdateMaterialCategoryCommandHandler(
 
     public async ValueTask<Unit> Handle(UpdateMaterialCategoryCommand request, CancellationToken cancellationToken)
     {
-        if (await _materialCategoryDao.DescriptionExists(request.Description, request.Id))
-            throw new MaterialCategoryAlreadyExistsException(request.Description);
+        string normalizedDescription = request.Description.NormalizeSpaces();
+
+        if (await _materialCategoryDao.DescriptionExists(normalizedDescription, request.Id))
+            throw new MaterialCategoryAlreadyExistsException(normalizedDescription);
 
         var category = await _materialCategoryRepository.GetById(request.Id)
             ?? throw new MaterialCategoryNotFoundException(request.Id);
 
-        category.Description = request.Description;
+        category.Description = normalizedDescription;
 
         return Unit.Value;
     }

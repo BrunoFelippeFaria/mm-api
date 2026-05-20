@@ -5,7 +5,7 @@ using MM.Application.Shared.Interfaces;
 
 namespace MM.Application.Shared.Behaviours;
 
-public class TranslacionalBehaviour<TRequest, TResponse> (
+public class TranslacionalBehaviour<TRequest, TResponse>(
     IUnityOfWork uow
 )
     : IPipelineBehavior<TRequest, TResponse>

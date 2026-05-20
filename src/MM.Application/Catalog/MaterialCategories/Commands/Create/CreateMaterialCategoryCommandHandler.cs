@@ -6,7 +6,7 @@ using MM.Domain.Catalog.Materials.Entities;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Create;
 
-public class CreateMaterialCategoryCommandHandler (IMaterialCategoryRepository materialCategoryRepository)
+public class CreateMaterialCategoryCommandHandler(IMaterialCategoryRepository materialCategoryRepository)
     : IRequestHandler<CreateMaterialCategoryCommand, Unit>
 {
     private readonly IMaterialCategoryRepository _materialCategoryRepository = materialCategoryRepository;

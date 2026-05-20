@@ -5,7 +5,7 @@ using MM.Infrastructure.Persistence.Context;
 
 namespace MM.Infrastructure.Persistence.UnityOfWork;
 
-public class UnityOfWork (AppDbContext context) : IUnityOfWork
+public class UnityOfWork(AppDbContext context) : IUnityOfWork
 {
     private readonly AppDbContext _context = context;
 

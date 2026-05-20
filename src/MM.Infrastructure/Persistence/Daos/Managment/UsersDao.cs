@@ -10,7 +10,7 @@ public class UsersDao(AppDbContext context) : IUsersDao
 {
     private readonly AppDbContext _context = context;
 
-    public async Task<UserAuthDto?> GetByAuthEmail (string email)
+    public async Task<UserAuthDto?> GetByAuthEmail(string email)
     {
         return await _context.Users
             .Where(u => u.Email == email)

@@ -6,7 +6,7 @@ using MM.Application.Catalog.MaterialCategories.Interfaces;
 
 namespace MM.Application.Catalog.MaterialCategories.Queries.GetById;
 
-public class GetMaterialCategoryByIdQueryHandler (IMaterialCategoryDao materialCategoryDao)
+public class GetMaterialCategoryByIdQueryHandler(IMaterialCategoryDao materialCategoryDao)
     : IRequestHandler<GetMaterialCategoryByIdQuery, MaterialCategoryDto>
 {
     private readonly IMaterialCategoryDao _materialCategoryDao = materialCategoryDao;

@@ -15,7 +15,7 @@ public class MaterialRepository(AppDbContext context) : IMaterialRepository
         return await _context.Materials
             .FindAsync(id);
     }
-    
+
     public void Create(Material material)
     {
         _context.Materials.Add(material);

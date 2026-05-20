@@ -1,10 +1,11 @@
 using FluentValidation;
+
 using MM.Domain.Shared.Base;
 using MM.Domain.Shared.Exceptions;
 
 namespace MM.API.Middlewares;
 
-public class ExceptionHandler(RequestDelegate  next)
+public class ExceptionHandler(RequestDelegate next)
 {
     private readonly RequestDelegate _next = next;
 
@@ -31,7 +32,7 @@ public class ExceptionHandler(RequestDelegate  next)
                 message = ex.Message
             });
         }
-        
+
         catch (ValidationException ex)
         {
             context.Response.ContentType = "application/json";
@@ -41,7 +42,8 @@ public class ExceptionHandler(RequestDelegate  next)
             {
                 code = "validation_error",
                 message = "um ou mais erros de validação.",
-                errors = ex.Errors.Select(e => new {
+                errors = ex.Errors.Select(e => new
+                {
                     field = e.PropertyName,
                     message = e.ErrorMessage
                 })

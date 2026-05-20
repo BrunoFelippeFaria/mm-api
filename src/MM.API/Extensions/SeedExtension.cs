@@ -9,7 +9,7 @@ public static class SeedsExtension
         using var scope = app.Services.CreateScope();
 
         var seeds = scope.ServiceProvider.GetServices<ISeed>();
-        
+
         foreach (var seed in seeds)
         {
             await seed.Seed();

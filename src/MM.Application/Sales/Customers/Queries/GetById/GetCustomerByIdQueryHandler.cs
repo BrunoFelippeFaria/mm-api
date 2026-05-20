@@ -7,7 +7,7 @@ using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Sales.Customers.Queries.GetById;
 
-public class GetCustomerByIdQueryHandler(ICustomersDao customerDao) 
+public class GetCustomerByIdQueryHandler(ICustomersDao customerDao)
     : IRequestHandler<GetCustomerByIdQuery, CustomerDto>
 {
     private readonly ICustomersDao _customerDao = customerDao;
@@ -17,6 +17,6 @@ public class GetCustomerByIdQueryHandler(ICustomersDao customerDao)
         var customer = await _customerDao.GetById(request.Id)
             ?? throw new CustomerNotFoundException(request.Id);
 
-        return customer; 
+        return customer;
     }
 }

@@ -8,6 +8,6 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-            .Length(3, 60);        
+            .Length(3, 60);
     }
 }

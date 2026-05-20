@@ -4,7 +4,7 @@ using MM.Infrastructure.Persistence.Context;
 
 namespace MM.Infrastructure.Persistence.Repositories.Sales;
 
-public class CustomerRepository (AppDbContext context) : ICustomerRepository
+public class CustomerRepository(AppDbContext context) : ICustomerRepository
 {
     private readonly AppDbContext _context = context;
 

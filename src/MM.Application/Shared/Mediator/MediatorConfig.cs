@@ -19,7 +19,7 @@ public static class MediatorConfig
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TranslacionalBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-    
+
         return services;
     }
 }

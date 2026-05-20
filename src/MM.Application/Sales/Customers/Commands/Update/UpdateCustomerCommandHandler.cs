@@ -9,7 +9,7 @@ namespace MM.Application.Sales.Customers.Commands.Update;
 
 public class UpdateCustomerCommandHandler(
     ICustomerRepository customerRepository
-) 
+)
     : IRequestHandler<UpdateCustomerCommand, Unit>
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;

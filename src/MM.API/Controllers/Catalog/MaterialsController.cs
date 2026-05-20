@@ -14,7 +14,7 @@ namespace MM.API.Controllers.Catalog;
 [ApiController]
 [Route("api/v1/catalog/materials")]
 [Authorize]
-public class MaterialsController (IMediator mediator) : ControllerBase
+public class MaterialsController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 

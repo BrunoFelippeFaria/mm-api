@@ -15,7 +15,7 @@ public static class RepositoryDependencies
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IMaterialRepository, MaterialRepository>();
         services.AddScoped<IMaterialCategoryRepository, MaterialCategoryRepository>();
-        
+
         return services;
     }
 }

@@ -5,11 +5,11 @@ using Mediator;
 
 namespace MM.Application.Shared.Behaviours;
 
-public class ValidationBehaviour<TRequest, TResponse> (
+public class ValidationBehaviour<TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators
 )
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest: IMessage
+    where TRequest : IMessage
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
 

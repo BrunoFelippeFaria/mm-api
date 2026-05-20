@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
+
 using MM.Domain.Management.Users.Entities;
 using MM.Domain.Shared.Interfaces;
 using MM.Infrastructure.Persistence.Context;

@@ -5,7 +5,7 @@ using MM.Application.Catalog.MaterialCategories.Interfaces;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Update;
 
-public class UpdateMaterialCategoryCommandHandler (IMaterialCategoryRepository materialCategoryRepository)
+public class UpdateMaterialCategoryCommandHandler(IMaterialCategoryRepository materialCategoryRepository)
     : IRequestHandler<UpdateMaterialCategoryCommand, Unit>
 {
     private readonly IMaterialCategoryRepository _materialCategoryRepository = materialCategoryRepository;

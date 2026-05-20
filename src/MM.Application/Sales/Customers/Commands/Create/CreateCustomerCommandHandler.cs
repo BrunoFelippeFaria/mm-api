@@ -6,7 +6,7 @@ using MM.Domain.Sales.Customers.Entities;
 
 namespace MM.Application.Sales.Customers.Commands.Create;
 
-public class CreateCustomerCommandHandler (ICustomerRepository customerRepository)
+public class CreateCustomerCommandHandler(ICustomerRepository customerRepository)
     : IRequestHandler<CreateCustomerCommand, Unit>
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;

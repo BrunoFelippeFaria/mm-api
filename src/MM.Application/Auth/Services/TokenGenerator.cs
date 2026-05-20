@@ -9,7 +9,7 @@ using MM.Application.Auth.Dtos;
 using MM.Application.Auth.Interfaces;
 namespace MM.Application.Auth.Services;
 
-public class TokenGenerator (IConfiguration configuration) : ITokenGenerator
+public class TokenGenerator(IConfiguration configuration) : ITokenGenerator
 {
     private readonly IConfiguration _configuration = configuration;
 

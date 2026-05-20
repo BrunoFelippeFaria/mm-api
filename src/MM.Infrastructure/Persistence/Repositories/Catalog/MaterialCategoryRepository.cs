@@ -16,6 +16,6 @@ public class MaterialCategoryRepository(AppDbContext context) : IMaterialCategor
 
     public async Task<MaterialCategory?> GetById(int id)
     {
-        return await _context.MaterialCategories.FindAsync(id); 
+        return await _context.MaterialCategories.FindAsync(id);
     }
 }

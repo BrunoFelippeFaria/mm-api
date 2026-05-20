@@ -8,7 +8,7 @@ using MM.Infrastructure.Persistence.Context;
 
 namespace MM.Infrastructure.Persistence.Daos.Sales;
 
-public class CustomersDao (AppDbContext context) : ICustomersDao
+public class CustomersDao(AppDbContext context) : ICustomersDao
 {
     private readonly AppDbContext _context = context;
 

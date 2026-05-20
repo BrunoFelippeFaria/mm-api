@@ -11,7 +11,7 @@ namespace MM.API.Controllers.Managment;
 [Route("api/auth")]
 [EnableRateLimiting("auth")]
 
-public class AuthController (IMediator mediator) : ControllerBase
+public class AuthController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 

@@ -9,7 +9,7 @@ using MM.Domain.Shared.Interfaces;
 
 namespace MM.Application.Auth.Commands.Login;
 
-public class LoginCommandHandler (
+public class LoginCommandHandler(
     IUsersDao userDao,
     IPasswordHasher passwordHasher,
     ITokenGenerator tokenGenerator
@@ -21,7 +21,7 @@ public class LoginCommandHandler (
     private readonly ITokenGenerator _tokenGenerator = tokenGenerator;
 
     public async ValueTask<string> Handle(LoginCommand request, CancellationToken cancellationToken)
-    {            
+    {
         var user = await _userDao.GetByAuthEmail(request.Email)
             ?? throw new InvalidCredentialsException();
 

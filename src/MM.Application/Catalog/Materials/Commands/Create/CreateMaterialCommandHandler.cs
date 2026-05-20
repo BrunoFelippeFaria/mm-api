@@ -5,7 +5,7 @@ using MM.Domain.Catalog.Materials.Entities;
 
 namespace MM.Application.Catalog.Materials.Commands.Create;
 
-class CreateMaterialCommandHandler (IMaterialRepository materialRepository)
+class CreateMaterialCommandHandler(IMaterialRepository materialRepository)
     : IRequestHandler<CreateMaterialCommand, Unit>
 {
     private readonly IMaterialRepository _materialRepository = materialRepository;

@@ -7,7 +7,7 @@ using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Catalog.Materials.Queries.GetById;
 
-public class GetMaterialByIdQueryHandler (IMaterialsDao materialsDao)
+public class GetMaterialByIdQueryHandler(IMaterialsDao materialsDao)
     : IRequestHandler<GetMaterialByIdQuery, MaterialDto>
 {
     private readonly IMaterialsDao _materialsDao = materialsDao;

@@ -5,5 +5,5 @@ namespace MM.Application.Catalog.Materials.Interfaces;
 public interface IMaterialRepository
 {
     Task<Material?> GetById(int id);
-    void Create(Material material); 
+    void Create(Material material);
 }

@@ -1,7 +1,9 @@
-using MM.Domain.Shared.Interfaces;
-using Konscious.Security.Cryptography;
 using System.Security.Cryptography;
 using System.Text;
+
+using Konscious.Security.Cryptography;
+
+using MM.Domain.Shared.Interfaces;
 
 namespace MM.Infrastructure.Security;
 
@@ -44,12 +46,12 @@ public class Argon2PasswordHasher : IPasswordHasher
     private byte[] GenerateHash(string password, byte[] salt)
     {
         using var hasher = new Argon2id(Encoding.UTF8.GetBytes(password));
-        
+
         hasher.Salt = salt;
         hasher.DegreeOfParallelism = 8;
-        hasher.MemorySize = 65536; 
-        hasher.Iterations = 4; 
+        hasher.MemorySize = 65536;
+        hasher.Iterations = 4;
         return hasher.GetBytes(_hash_size);
     }
-    
+
 }

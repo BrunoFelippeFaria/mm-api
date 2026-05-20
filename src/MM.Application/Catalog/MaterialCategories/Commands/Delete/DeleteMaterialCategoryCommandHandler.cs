@@ -5,7 +5,7 @@ using MM.Application.Catalog.MaterialCategories.Interfaces;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Delete;
 
-public class DeleteMaterialCategoryCommandHandler (IMaterialCategoryRepository materialCategoryRepository)
+public class DeleteMaterialCategoryCommandHandler(IMaterialCategoryRepository materialCategoryRepository)
     : IRequestHandler<DeleteMaterialCategoryCommand, Unit>
 {
     private readonly IMaterialCategoryRepository _materialCategoryRepository = materialCategoryRepository;
@@ -16,7 +16,7 @@ public class DeleteMaterialCategoryCommandHandler (IMaterialCategoryRepository m
             ?? throw new MaterialCategoryNotFoundException(request.Id);
 
         category.Delete();
-        
+
         return Unit.Value;
     }
 }

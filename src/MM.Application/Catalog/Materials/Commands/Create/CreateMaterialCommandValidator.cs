@@ -8,6 +8,6 @@ public class CreateMaterialCommandValidator : AbstractValidator<CreateMaterialCo
     {
         RuleFor(x => x.Description)
             .Length(3, 60)
-            .NotEmpty();    
+            .NotEmpty();
     }
 }

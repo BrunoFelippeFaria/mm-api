@@ -7,7 +7,7 @@ using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Sales.Customers.Commands.Delete;
 
-public class DeleteCustomerCommandHandler (ICustomerRepository customerRepository)
+public class DeleteCustomerCommandHandler(ICustomerRepository customerRepository)
     : IRequestHandler<DeleteCustomerCommand, Unit>
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;

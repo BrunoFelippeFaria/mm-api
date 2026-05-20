@@ -23,8 +23,11 @@ public class ExceptionHandler(RequestDelegate next)
             if (ex is NotFoundException)
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
 
-            if (ex is UnauthorizedException)
+            else if (ex is UnauthorizedException)
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+            else if (ex is ConflictException)
+                context.Response.StatusCode = StatusCodes.Status409Conflict;
 
             await context.Response.WriteAsJsonAsync(new
             {

@@ -1,8 +1,15 @@
 using MM.Domain.Shared.Base;
+using MM.Domain.Shared.Extensions;
 
 namespace MM.Domain.Catalog.Materials.Entities;
 
 public class MaterialCategory : Entity
 {
-    public required string Description { get; set; }
+    private string _description = string.Empty;
+
+    public required string Description
+    {
+        get => _description;
+        set => _description = value.NormalizeSpaces();
+    }
 }

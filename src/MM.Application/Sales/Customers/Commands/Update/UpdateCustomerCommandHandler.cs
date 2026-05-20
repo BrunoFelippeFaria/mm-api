@@ -1,6 +1,7 @@
 
 using Mediator;
 
+using MM.Application.Sales.Customers.Exceptions;
 using MM.Application.Sales.Customers.Interfaces;
 using MM.Domain.Shared.Exceptions;
 
@@ -16,7 +17,7 @@ public class UpdateCustomerCommandHandler(
     public async ValueTask<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.GetById(request.Id)
-            ?? throw new NotFoundException($"customer {request.Id} does not exist");
+            ?? throw new CustomerNotFoundException(request.Id);
 
         customer.Name = request.Name;
 

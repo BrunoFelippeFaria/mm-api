@@ -1,8 +1,7 @@
-
 using Mediator;
 
+using MM.Application.Catalog.MaterialCategories.Exceptions;
 using MM.Application.Catalog.MaterialCategories.Interfaces;
-using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Delete;
 
@@ -14,7 +13,7 @@ public class DeleteMaterialCategoryCommandHandler (IMaterialCategoryRepository m
     public async ValueTask<Unit> Handle(DeleteMaterialCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await _materialCategoryRepository.GetById(request.Id)
-            ?? throw new NotFoundException($"category {request.Id} does not exist");
+            ?? throw new MaterialCategoryNotFoundException(request.Id);
 
         category.Delete();
         

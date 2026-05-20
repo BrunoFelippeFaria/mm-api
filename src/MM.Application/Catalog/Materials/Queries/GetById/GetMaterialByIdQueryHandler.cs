@@ -1,6 +1,7 @@
 using Mediator;
 
 using MM.Application.Catalog.Materials.Dtos;
+using MM.Application.Catalog.Materials.Exceptions;
 using MM.Application.Catalog.Materials.Interfaces;
 using MM.Domain.Shared.Exceptions;
 
@@ -14,7 +15,7 @@ public class GetMaterialByIdQueryHandler (IMaterialsDao materialsDao)
     public async ValueTask<MaterialDto> Handle(GetMaterialByIdQuery request, CancellationToken cancellationToken)
     {
         var material = await _materialsDao.GetById(request.Id)
-            ?? throw new NotFoundException($"Material {request.Id} does not exist");
+            ?? throw new MaterialNotFoundException(request.Id);
 
         return material;
     }

@@ -1,7 +1,7 @@
 using Mediator;
 
+using MM.Application.Catalog.MaterialCategories.Exceptions;
 using MM.Application.Catalog.MaterialCategories.Interfaces;
-using MM.Domain.Shared.Exceptions;
 
 namespace MM.Application.Catalog.MaterialCategories.Commands.Update;
 
@@ -13,7 +13,7 @@ public class UpdateMaterialCategoryCommandHandler (IMaterialCategoryRepository m
     public async ValueTask<Unit> Handle(UpdateMaterialCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await _materialCategoryRepository.GetById(request.Id)
-            ?? throw new NotFoundException($"category {request.Id} does not exist");
+            ?? throw new MaterialCategoryNotFoundException(request.Id);
 
         category.Description = request.Description;
 

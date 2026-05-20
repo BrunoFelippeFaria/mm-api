@@ -1,6 +1,7 @@
 
 using Mediator;
 
+using MM.Application.Auth.Exceptions;
 using MM.Application.Auth.Interfaces;
 using MM.Application.Shared.Interfaces;
 using MM.Domain.Shared.Exceptions;
@@ -20,17 +21,12 @@ public class LoginCommandHandler (
     private readonly ITokenGenerator _tokenGenerator = tokenGenerator;
 
     public async ValueTask<string> Handle(LoginCommand request, CancellationToken cancellationToken)
-    {
-        var unauthorizedException =
-            new UnauthorizedException("Email ou Senha Incorretos");
-            
+    {            
         var user = await _userDao.GetByAuthEmail(request.Email)
-            ?? throw unauthorizedException;
+            ?? throw new InvalidCredentialsException();
 
-        bool authorized = _passwordHasher.Verify(request.Password, user.Hash);
-
-        if (!authorized)
-            throw unauthorizedException;
+        if (!_passwordHasher.Verify(request.Password, user.Hash))
+            throw new InvalidCredentialsException();
 
         var token = _tokenGenerator.GenerateJwtToken(user);
 

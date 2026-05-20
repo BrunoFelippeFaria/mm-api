@@ -1,6 +1,7 @@
 
 using Mediator;
 
+using MM.Application.Sales.Customers.Exceptions;
 using MM.Application.Sales.Customers.Interfaces;
 using MM.Domain.Shared.Exceptions;
 
@@ -14,7 +15,7 @@ public class DeleteCustomerCommandHandler (ICustomerRepository customerRepositor
     public async ValueTask<Unit> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.GetById(request.Id)
-            ?? throw new NotFoundException($"customer {request.Id} does not exist");
+            ?? throw new CustomerNotFoundException(request.Id);
 
         customer.Delete();
         return Unit.Value;

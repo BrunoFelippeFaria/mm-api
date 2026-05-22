@@ -36,10 +36,25 @@ public class MaterialCategoryDao(AppDbContext context) : IMaterialCategoryDao
             .FirstOrDefaultAsync(m => m.Id == id);
     }
 
-    public async Task<bool> DescriptionExists(string description, int? ignoredId=null)
+    public async Task<bool> DescriptionExists(string description, int? ignoredId = null)
     {
         return await _context.MaterialCategories
             .WhereIf(ignoredId.HasValue, m => m.Id != ignoredId)
             .AnyAsync(m => m.Description == description);
+    }
+    
+    public async Task<bool> HasMaterials(int id)
+    {
+        return await _context.Materials
+            .AnyAsync(m => m.CategoryId == id);
+    }
+
+    public async Task RemoveCategoryFromMaterials(int id)
+    {
+        await _context.Materials
+            .Where(m => m.CategoryId == id)
+            .ExecuteUpdateAsync(setters =>
+                setters.SetProperty(m => m.CategoryId, (int?)null)
+        );
     }
 }

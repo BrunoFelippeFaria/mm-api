@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Threading.Tasks;
-
 using Microsoft.EntityFrameworkCore;
 
 using MM.Application.Catalog.MaterialCategories.Dtos;
@@ -39,12 +36,13 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
                 SafetyStock = m.SafetyStock,
                 Notes = m.Notes,
 
-
-                Category = new MaterialCategoryDto
+            Category = m.Category != null
+                ? new MaterialCategoryDto
                 {
                     Id = m.Category.Id,
                     Description = m.Category.Description
-                },
+                }
+                : null,
             })
             .AsNoTracking()
             .FirstOrDefaultAsync();

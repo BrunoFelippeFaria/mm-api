@@ -49,9 +49,9 @@ public class MaterialsCategoryController(IMediator mediator) : ControllerBase
     }
 
     [HttpPatch("{id}/delete")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int id, [FromBody] DeleteMaterialCategoryCommand command)
     {
-        await _mediator.Send(new DeleteMaterialCategoryCommand(id));
+        await _mediator.Send(command with { Id = id });
         return NoContent();
     }
 }

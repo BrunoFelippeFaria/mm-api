@@ -15,8 +15,6 @@ public static class DataDependencies
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("Default"))
-            .EnableSensitiveDataLogging()
-            .EnableDetailedErrors()
         );
         
         services.AddScoped<ISeed, AdminSeed>();

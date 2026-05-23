@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using MM.Application.Catalog.Materials.Commands.Create;
+using MM.Application.Catalog.Materials.Commands.Delete;
+using MM.Application.Catalog.Materials.Commands.Update;
 using MM.Application.Catalog.Materials.Queries.GetAll;
 using MM.Application.Catalog.Materials.Queries.GetById;
 
@@ -40,14 +42,16 @@ public class MaterialsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateMaterialCommand command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(command with { Id = id });
+        return NoContent();
     }
 
     [HttpPatch("{id}/delete")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(new DeleteMaterialCommand(id));
+        return NoContent();
     }
 }

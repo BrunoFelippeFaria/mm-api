@@ -1,7 +1,7 @@
 import subprocess
 from sys import argv
 
-from constants import PROJECT, STARTUP_PROJECT
+from constants import MM_INFRASTRUCTURE, MM_API
 
 def run(command: list[str]):
     subprocess.run(command)
@@ -9,8 +9,8 @@ def run(command: list[str]):
 def update():
     run([
         "dotnet", "ef", "database", "update",
-        "--project", str(PROJECT),
-        "--startup-project", str(STARTUP_PROJECT)
+        "--project", str(MM_INFRASTRUCTURE),
+        "--startup-project", str(MM_API)
     ])
 
 if __name__ == "__main__":

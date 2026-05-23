@@ -51,7 +51,7 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
             .FirstOrDefaultAsync();
     }
     
-    public async Task<bool> DescriptionExistis(string description, int? ignoredId = null)
+    public async Task<bool> DescriptionExists(string description, int? ignoredId = null)
     {
         return await _context.Materials
             .WhereIf(ignoredId.HasValue, m => m.Id != ignoredId!.Value)

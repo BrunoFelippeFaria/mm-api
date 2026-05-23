@@ -17,7 +17,7 @@ public class CreateMaterialCommandHandler(IMaterialRepository materialRepository
     {
         string normalizedDescription = request.Description.NormalizeSpaces();
 
-        if (await _dao.DescriptionExistis(normalizedDescription))
+        if (await _dao.DescriptionExists(normalizedDescription))
             throw new MaterialAlredyExistsException(normalizedDescription);
 
         var material = new Material

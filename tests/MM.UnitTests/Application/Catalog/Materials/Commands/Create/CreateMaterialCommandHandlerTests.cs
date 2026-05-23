@@ -27,7 +27,7 @@ public class CreateMaterialCommandHandlerTests
     [Fact]
     public async Task Handle_DescriptionAlredyExists_ThrowsMaterialAlredyExistsException()
     {
-        _dao.DescriptionExistis(Arg.Any<string>()).Returns(true);
+        _dao.DescriptionExists(Arg.Any<string>()).Returns(true);
 
         var act = async () => await _handler.Handle(new CreateMaterialCommand
         {
@@ -41,7 +41,7 @@ public class CreateMaterialCommandHandlerTests
     [Fact]
     public async Task Handle_ValidDescription_NormalizeAndCreate()
     {
-        _dao.DescriptionExistis(Arg.Any<string>()).Returns(false);
+        _dao.DescriptionExists(Arg.Any<string>()).Returns(false);
 
         await _handler.Handle(new CreateMaterialCommand
         {

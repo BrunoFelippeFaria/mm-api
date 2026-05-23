@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
 
 using MM.Application.Catalog.MaterialCategories.Dtos;
 using MM.Application.Catalog.Materials.Dtos;
 using MM.Application.Catalog.Materials.Interfaces;
+using MM.Infrastructure.Extensions;
 using MM.Infrastructure.Persistence.Context;
 
 namespace MM.Infrastructure.Persistence.Daos.Catalog;
@@ -36,7 +39,7 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
                 SafetyStock = m.SafetyStock,
                 Notes = m.Notes,
 
-            Category = m.Category != null
+                Category = m.Category != null
                 ? new MaterialCategoryDto
                 {
                     Id = m.Category.Id,
@@ -46,5 +49,12 @@ public class MaterialsDao(AppDbContext context) : IMaterialsDao
             })
             .AsNoTracking()
             .FirstOrDefaultAsync();
+    }
+    
+    public async Task<bool> DescriptionExistis(string description, int? ignoredId = null)
+    {
+        return await _context.Materials
+            .WhereIf(ignoredId.HasValue, m => m.Id != ignoredId!.Value)
+            .AnyAsync(m => m.Description == description);
     }
 }

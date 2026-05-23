@@ -1,20 +1,28 @@
 using Mediator;
 
+using MM.Application.Catalog.Materials.Exceptions;
 using MM.Application.Catalog.Materials.Interfaces;
 using MM.Domain.Catalog.Materials.Entities;
+using MM.Domain.Shared.Extensions;
 
 namespace MM.Application.Catalog.Materials.Commands.Create;
 
-class CreateMaterialCommandHandler(IMaterialRepository materialRepository)
+public class CreateMaterialCommandHandler(IMaterialRepository materialRepository, IMaterialsDao dao)
     : IRequestHandler<CreateMaterialCommand, Unit>
 {
     private readonly IMaterialRepository _materialRepository = materialRepository;
+    private readonly IMaterialsDao _dao = dao;
 
-    public ValueTask<Unit> Handle(CreateMaterialCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(CreateMaterialCommand request, CancellationToken cancellationToken)
     {
+        string normalizedDescription = request.Description.NormalizeSpaces();
+
+        if (await _dao.DescriptionExistis(normalizedDescription))
+            throw new MaterialAlredyExistsException(normalizedDescription);
+
         var material = new Material
         {
-            Description = request.Description,
+            Description = normalizedDescription,
             Unit = request.Unit,
             CategoryId = request.CategoryId,
             Notes = request.Notes,
@@ -23,6 +31,6 @@ class CreateMaterialCommandHandler(IMaterialRepository materialRepository)
 
         _materialRepository.Create(material);
 
-        return ValueTask.FromResult(Unit.Value);
+        return Unit.Value;
     }
 }

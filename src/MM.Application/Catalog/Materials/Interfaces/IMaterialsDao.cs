@@ -6,4 +6,5 @@ public interface IMaterialsDao
 {
     Task<IEnumerable<MaterialListDto>> GetAll();
     Task<MaterialDto?> GetById(int id);
+    Task<bool> DescriptionExistis(string description, int? ignoredId = null);
 }

@@ -10,9 +10,18 @@ public static class SeedsExtension
 
         var seeds = scope.ServiceProvider.GetServices<ISeed>();
 
+        
         foreach (var seed in seeds)
         {
-            await seed.Seed();
+            try
+            {
+                await seed.Seed();
+            }
+
+            catch
+            {
+                
+            }
         }
     }
 }

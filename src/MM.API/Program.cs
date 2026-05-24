@@ -19,12 +19,14 @@ var app = builder.Build();
 
 await app.ApplySeeds();
 
+
 app.UseRouting();
 app.MapControllers();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionHandler>();
+app.AddHealthCheck();
 
 if (app.Environment.IsDevelopment())
 {

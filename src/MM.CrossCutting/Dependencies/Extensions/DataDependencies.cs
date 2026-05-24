@@ -13,10 +13,15 @@ public static class DataDependencies
 {
     public static IServiceCollection AddData(this IServiceCollection services, IConfiguration configuration)
     {
+        string connectionString = configuration.GetConnectionString("Default") ?? "";
+
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("Default"))
+            options.UseNpgsql(connectionString)
         );
-        
+
+        services.AddHealthChecks()
+            .AddNpgSql(connectionString);
+
         services.AddScoped<ISeed, AdminSeed>();
         services.AddScoped<IUnityOfWork, UnityOfWork>();
 
